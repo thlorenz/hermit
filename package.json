@@ -1,0 +1,27 @@
+{
+  "name": "hermit",
+  "version": "0.0.0",
+  "description": "Prints html in the terminal using colors to reflect the document structure.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thlorenz/hermit.git"
+  },
+  "keywords": [
+    "html",
+    "parser",
+    "terminal",
+    "highlight",
+    "console"
+  ],
+  "author": "Thorsten Lorenz <thlorenz@gmx.de> (thlorenz.com)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "efa3153077ef6476e906485f3698ee79024092a2",
+  "dependencies": {
+    "sax": "~0.5.1"
+  }
+}
