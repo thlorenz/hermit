@@ -1,5 +1,4 @@
 module.exports = 
-  "<html>" +
   "<p>Asynchronous file open. See open(2). <code>flags</code> can be:\n\n</p>" + 
   "<ul>" + 
     "<li><p><code>'r'</code> - Open file for reading.\nAn exception occurs if the file does not exist.</p>\n</li>" +
@@ -22,5 +21,4 @@ module.exports =
     "<p><code>mode</code> defaults to <code>0666</code>. The callback gets two arguments <code>(err, fd)</code>.\n\n</p>\n" + 
     "<p>Exclusive mode (<code>O_EXCL</code>) ensures that <code>path</code> is newly created. <code>fs.open()</code>\n" + 
     "fails if a file by that name already exists. On POSIX systems, symlinks are\n" + 
-    "not followed. Exclusive mode may or may not work with network file systems.\n\n</p>\n" +
-    "</html>";
+    "not followed. Exclusive mode may or may not work with network file systems.\n\n</p>\n";
