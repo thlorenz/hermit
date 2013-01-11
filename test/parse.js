@@ -116,8 +116,9 @@ test('\n# parse <ul><li><p>hello world</p></li></ul>', function (t) {
         tag: 'p' } ]
   test('\n# parse\n' + s + '\nreturns\n' + inspect(expected), function (t) {
     parse(s, function (err, res) {
+      t.notOk(err, 'returns no errors') 
       t.deepEquals(res, expected, 'returns array of tags including expected text and parents')
       t.end() 
     })
-  });
+  })
 }()
