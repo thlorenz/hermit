@@ -92,10 +92,32 @@ test('\n# parse <ul><li><p>hello world</p></li></ul>', function (t) {
 })
 
 +function () {
+  function inspect(obj, depth) {
+    return require('util').inspect(obj, false, depth || 5, true);
+  }
+
   var s = 
+    "<html>" +
     "<p>Asynchronous file open. See open(2). <code>flags</code> can be:\n\n</p>" + 
     "<ul>" + 
       "<li><p><code>'r'</code> - Open file for reading.\nAn exception occurs if the file does not exist.</p>\n</li>" +
       "<li><p><code>'r+'</code> - Open file for reading and writing.\nAn exception occurs if the file does not exist.</p>\n</li>\n" + 
-    "</ul>"
+    "</ul>" +
+    "</html>"
+    , expected = [ 
+      { text: 'Asynchronous file open. See open(2). ', parents: [ 'html' ], tag: 'p' },
+      { text: 'flags', parents: [ 'html', 'p' ], tag: 'code' },
+      { text: ' can be:\n', parents: [ 'html' ], tag: 'p' },
+      { text: '\'r\'', parents: [ 'html', 'ul', 'li', 'p' ], tag: 'code' },
+      { text: ' - Open file for reading.An exception occurs if the file does not exist.', parents: [ 'html', 'ul', 'li' ], tag: 'p' },
+      { text: '\'r+\'', parents: [ 'html', 'ul', 'li', 'p' ], tag: 'code' },
+      { text: ' - Open file for reading and writing.An exception occurs if the file does not exist.',
+        parents: [ 'html', 'ul', 'li' ],
+        tag: 'p' } ]
+  test('\n# parse\n' + s + '\nreturns\n' + inspect(expected), function (t) {
+    parse(s, function (err, res) {
+      t.deepEquals(res, expected, 'returns array of tags including expected text and parents')
+      t.end() 
+    })
+  });
 }()
