@@ -29,6 +29,14 @@ test('\n# parse <p>hello world\\n</p>', function (t) {
   });  
 })
 
+test('\n# parse <img src="hello">some text to trick you  </img><p>hello world</p>', function (t) {
+  parse('<img src="hello">some text to trick you </img><p>hello world</p>', function (err, res) {
+    var fst = res[0];
+    t.equal(fst.tag, 'p', 'first tag is p (ignores image tag)') 
+    t.end()
+  })
+})
+
 test('\n# parse <p>hello world\\\\n</p>', function (t) {
   parse('<p>hello world\\n</p>', function (err, res) {
     var fst = res[0];
