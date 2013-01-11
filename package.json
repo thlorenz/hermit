@@ -23,6 +23,7 @@
   "gitHead": "efa3153077ef6476e906485f3698ee79024092a2",
   "dependencies": {
     "sax": "~0.5.1",
-    "tape": "~0.1.5"
+    "tape": "~0.1.5",
+    "ansicolors": "~0.1.0"
   }
 }
