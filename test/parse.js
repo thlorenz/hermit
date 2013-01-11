@@ -115,7 +115,7 @@ test('\n# parse <ul><li><p>hello world</p></li></ul>', function (t) {
     , expected = [ 
       { text: 'Asynchronous file open. See open(2). ', parents: [ 'html' ], tag: 'p' },
       { text: 'flags', parents: [ 'html', 'p' ], tag: 'code' },
-      { text: ' can be:\n', parents: [ 'html' ], tag: 'p' },
+      { text: ' can be:', parents: [ 'html' ], tag: 'p' },
       { text: '\'r\'', parents: [ 'html', 'ul', 'li', 'p' ], tag: 'code' },
       { text: ' - Open file for reading.An exception occurs if the file does not exist.', parents: [ 'html', 'ul', 'li' ], tag: 'p' },
       { text: '\'r+\'', parents: [ 'html', 'ul', 'li', 'p' ], tag: 'code' },
