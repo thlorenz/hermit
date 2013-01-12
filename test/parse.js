@@ -48,53 +48,74 @@ test('\n# parse <p>hello world\\\\n</p>', function (t) {
   });  
 })
 
+function check_li_p(t, res, expectedParentsOf_p) {
+  var fst = res[0]
+    , snd = res[1]
+    , trd = res[2]
+  
+  t.equal(res.length, 3, 'returns three')    
+  t.equal(fst.tag, 'li', 'first li')
+  t.ok(fst.open, 'open')
+  t.equal(fst.text, '', 'without text')
+
+  t.equal(snd.tag, 'p', 'second tagged as p') 
+  t.equal(snd.text, 'hello world', 'with text hello world')
+  t.deepEqual(snd.parents, expectedParentsOf_p, 'with parents [ ' + expectedParentsOf_p + ' ]')
+
+  t.equal(trd.tag, 'li', 'third li')
+  t.notok(trd.open, 'not open')
+  t.equal(trd.text, '', 'without text')
+
+  t.end()
+}
 test('\n# parse <li><p>hello world</p></li>', function (t) {
   parse('<li><p>hello world</p></li>', function (err, res) {
-    var fst = res[0];
-    t.equal(res.length, 1, 'returns one')    
-    t.equal(fst.tag, 'p', 'tagged as p') 
-    t.equal(fst.text, 'hello world', 'with text hello world')
-    t.deepEqual(fst.parents, [ 'li' ], 'with parents [ li ]')
-    t.end()
+    check_li_p(t, res, [ 'li' ])
   });  
 })
 
 test('\n# parse <li>   <p>hello world</p></li>', function (t) {
   parse('<li>   <p>hello world</p></li>', function (err, res) {
-    var fst = res[0];
-    t.equal(res.length, 1, 'returns one')    
-    t.equal(fst.tag, 'p', 'tagged as p') 
-    t.equal(fst.text, 'hello world', 'with text hello world (spaces trimmed)')
-    t.deepEqual(fst.parents, [ 'li' ], 'with parents [ li ]')
-    t.end()
-  });  
-})
-
-test('\n# parse <li>   <p>hello world</p><span>   </span></li>', function (t) {
-  parse('<li><p>hello world</p><span>   </span></li>', function (err, res) {
-    var fst = res[0];
-    var snd = res[1];
-    t.equal(res.length, 2, 'returns two')    
-
-    t.equal(fst.tag, 'p', 'first tagged as p') 
-    t.equal(fst.text, 'hello world', 'with text hello world (spaces trimmed)')
-    t.deepEqual(fst.parents, [ 'li' ], 'with parents [ li ]')
-
-    t.equal(snd.tag, 'span', 'second tagged as span') 
-    t.equal(snd.text, '   ', 'with text "   " (spaces)')
-    t.deepEqual(snd.parents, [ 'li' ], 'with parents [ li ]')
-
-    t.end()
+    check_li_p(t, res, [ 'li' ])
   });  
 })
 
 test('\n# parse <ul><li><p>hello world</p></li></ul>', function (t) {
   parse('<ul><li><p>hello world</p></li></ul>', function (err, res) {
-    var fst = res[0];
-    t.equal(res.length, 1, 'returns one')    
-    t.equal(fst.tag, 'p', 'tagged as p') 
-    t.equal(fst.text, 'hello world', 'with text hello world')
-    t.deepEqual(fst.parents, [ 'ul', 'li' ], 'with parents [ ul, li ]')
+    check_li_p(t, res, [ 'ul', 'li' ])
+  });  
+})
+
+test('\n# parse <li>   <p>hello world</p><span>   </span></li>', function (t) {
+  parse('<li>   <p>hello world</p><span>   </span></li>', function (err, res) {
+    var fst = res[0]
+      , snd = res[1]
+      , trd = res[2]
+      , fou = res[3]
+      , fif = res[4]
+    
+    t.equal(res.length, 5, 'returns five')    
+
+    t.equal(fst.tag, 'li', 'first li')
+    t.ok(fst.open, 'open')
+    t.equal(fst.text, '', 'without text')
+
+    t.equal(snd.tag, 'p', 'second tagged as p') 
+    t.equal(snd.text, 'hello world', 'with text hello world (spaces trimmed)')
+    t.deepEqual(snd.parents, [ 'li' ], 'with parents [ li ]')
+
+    t.equal(trd.tag, 'li', 'third li')
+    t.notok(trd.open, 'not open')
+    t.equal(trd.text, '', 'without text')
+
+    t.equal(fou.tag, 'span', 'fourth tagged as span') 
+    t.equal(fou.text, '   ', 'with text "   " (spaces)')
+    t.deepEqual(fou.parents, [ 'li' ], 'with parents [ li ]')
+
+    t.equal(fif.tag, 'li', 'third li')
+    t.notok(fif.open, 'not open')
+    t.equal(fif.text, '', 'without text')
+
     t.end()
   });  
 })
@@ -168,7 +189,7 @@ test('\n# parse <ul><li><p>hello world</p></li></ul>', function (t) {
 
   test('\n# parse\n' + s + '\nreturns\n' + inspect(expected), function (t) {
     parse(s, function (err, res) {
-      t.notOk(err, 'returns no errors') 
+      t.notok(err, 'returns no errors') 
       t.deepEquals(res, expected, 'returns array of tags including expected text and parents')
       t.end() 
     })
