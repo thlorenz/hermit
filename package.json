@@ -4,7 +4,7 @@
   "description": "Prints html in the terminal using colors to reflect the document structure.",
   "main": "index.js",
   "scripts": {
-    "test": "node test/*.js"
+    "test": "node test/runner.js"
   },
   "repository": {
     "type": "git",
