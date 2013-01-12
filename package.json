@@ -24,6 +24,7 @@
   "dependencies": {
     "sax": "~0.5.1",
     "tape": "~0.1.5",
-    "ansicolors": "~0.1.0"
+    "ansicolors": "~0.1.0",
+    "ansistyles": "~0.1.0"
   }
 }
