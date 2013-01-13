@@ -26,15 +26,9 @@ var src = [
 
 test('render parsed: \n' + src + '\nwith list indent "12"', function (t) {
   parse(src, function (err, res) {
-    var expected = [
-        ''
-      , 'outside'
-      , '12- One Level List'
-      , ''
-      , '1212- Two Levels List'
-      , ''
-      , ''
-        ].join('\n')
+    var expected = 
+          '\n\noutside\n12- One Level List\n' 
+        + '\n1212- Two Levels List\n\n'
       , layedout = layout(res, { listIndent: '12' })
       , result = render(layedout)
 
@@ -45,15 +39,9 @@ test('render parsed: \n' + src + '\nwith list indent "12"', function (t) {
 
 test('render parsed: \n' + src + '\nwith list indent "1234"', function (t) {
   parse(src, function (err, res) {
-    var expected = [
-        ''
-      , 'outside'
-      , '1234- One Level List'
-      , ''
-      , '12341234- Two Levels List'
-      , ''
-      , ''
-        ].join('\n')
+    var expected = 
+          '\n\noutside\n1234- One Level List\n'
+        + '\n12341234- Two Levels List\n\n'
       , layedout = layout(res, { listIndent: '1234' })
       , result = render(layedout)
 
