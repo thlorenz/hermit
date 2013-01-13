@@ -51,16 +51,22 @@ function check(title, html, expected) {
 }();
 
 +function code_p() {
-  var html = '<p>Here is some code: <code>var a = 3;</code></p>'
-    , expected = 'Here is some code: \u001b[30m\u001b[47mvar a = 3;\u001b[49m\u001b[39m'
+  var html = '<p>Here is some unparseable code: <code>var a 3</code></p>'
+    , expected = 'Here is some unparseable code: \u001b[30m\u001b[47mvar a 3\u001b[49m\u001b[39m'
   check('code inside <p>', html, expected)
 }();
 
 +function code_li_p() {
-  var html = '<li><p>Here is some code: <code>var a = 3;</code> that you should read</p></li>'
+  var html = '<li><p>Here is some unparseable code: <code>var a 3</code> that you should read</p></li>'
     , expected = 
-        '\u001b[90mHere is some code: \u001b[39m'
-      + '\u001b[30m\u001b[47mvar a = 3;\u001b[49m\u001b[39m'
+        '\u001b[90mHere is some unparseable code: \u001b[39m'
+      + '\u001b[30m\u001b[47mvar a 3\u001b[49m\u001b[39m'
       + '\u001b[90m that you should read\u001b[39m'
   check('code inside <li><p>', html, expected)
+}();
+
++function code_parseable_p() {
+  var html = '<p>Here is some parseable code: <code>var a = 3;</code></p>'
+    , expected = 'Here is some parseable code: \u001b[32mvar\u001b[39m \u001b[37ma\u001b[39m \u001b[93m=\u001b[39m \u001b[34m3\u001b[39m\u001b[90m;\u001b[39m'
+  check('parseable code inside <p> is syntax highlighted', html, expected)
 }();

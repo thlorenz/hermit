@@ -25,6 +25,7 @@
     "sax": "~0.5.1",
     "tape": "~0.1.5",
     "ansistyles": "~0.1.0",
-    "ansicolors": "~0.2.1"
+    "ansicolors": "~0.2.1",
+    "cardinal": "~0.3.1"
   }
 }
