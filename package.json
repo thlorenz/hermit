@@ -1,6 +1,6 @@
 {
   "name": "hermit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Prints html in the terminal using colors and simple layout to reflect the document structure.",
   "main": "hermit.js",
   "scripts": {
