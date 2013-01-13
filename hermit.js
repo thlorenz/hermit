@@ -9,23 +9,13 @@ var hermit = module.exports = function hermit(html, cb) {
       , styled = style(layedout)
       , rendered = render(styled); 
 
+    // conform to (err, res) signature even though no errors are propagated at this point
     cb(null, rendered);
   });
 };
 
-var fsopenHtml = 
-  "<html>" +
-  "<p>Asynchronous file open. See open(2). <code>flags</code> can be:\n\n</p>" + 
-  "<ul>" + 
-    "<li><p><code>'r'</code> - Open file for reading.\nAn exception occurs if the file does not exist.</p>\n</li>" +
-    "<li><p><code>'r+'</code> - Open file for reading and writing.\nAn exception occurs if the file does not exist.</p>\n</li>\n" + 
-  "</ul>" +
-  "</html>"
-
-var html = require('fs')
-  .readFileSync(require.resolve('./test/fixtures/nodedoc-repl-entire-page.html'), 'utf-8');
-
-hermit(html, function (err, res) {
-  console.log(res);
-});
-
+// Expose helper libraries
+module.exports.parse  =  parse;
+module.exports.layout =  layout;
+module.exports.style  =  style;
+module.exports.render =  render;
