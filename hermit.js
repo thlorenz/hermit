@@ -3,10 +3,16 @@ var parse = require('./lib/parse')
   , style = require('./lib/style')
   , render = require('./lib/render');
 
-var hermit = module.exports = function hermit(html, cb) {
-  parse(html, { html: true }, function (err, res) {
-    var layedout = layout(res)
-      , styled = style(layedout)
+var hermit = module.exports = function hermit(html, opts, cb) {
+  console.log('running hermit');
+  if (!cb) {
+    cb = opts;
+    opts = {};
+  }
+
+  parse(html, opts, function (err, res) {
+    var layedout = layout(res, opts)
+      , styled = style(layedout, opts)
       , rendered = render(styled); 
 
     // conform to (err, res) signature even though no errors are propagated at this point
@@ -15,7 +21,7 @@ var hermit = module.exports = function hermit(html, cb) {
 };
 
 // Expose helper libraries
-module.exports.parse  =  parse;
-module.exports.layout =  layout;
-module.exports.style  =  style;
-module.exports.render =  render;
+hermit.parse  =  parse;
+hermit.layout =  layout;
+hermit.style  =  style;
+hermit.render =  render;

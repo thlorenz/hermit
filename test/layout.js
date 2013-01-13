@@ -11,7 +11,7 @@ function inspect(obj, depth) {
 }
 
 var src = [
-    '<p>outside</p>'
+    '<h2>outside</h2>'
   , '<ul>'  
   , ' <li>' 
   , '   <p>- One Level List</p>'  
