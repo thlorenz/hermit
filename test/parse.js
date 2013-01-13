@@ -56,14 +56,18 @@ function check_li_p(t, res, expectedParentsOf_p) {
   t.equal(res.length, 3, 'returns three')    
   t.equal(fst.tag, 'li', 'first li')
   t.ok(fst.open, 'open')
+  t.notok(fst.close, 'not close')
   t.equal(fst.text, '', 'without text')
 
   t.equal(snd.tag, 'p', 'second tagged as p') 
+  t.ok(snd.open, 'open')
+  t.notok(snd.close, 'not close')
   t.equal(snd.text, 'hello world', 'with text hello world')
   t.deepEqual(snd.parents, expectedParentsOf_p, 'with parents [ ' + expectedParentsOf_p + ' ]')
 
   t.equal(trd.tag, 'li', 'third li')
   t.notok(trd.open, 'not open')
+  t.ok(trd.close, 'close')
   t.equal(trd.text, '', 'without text')
 
   t.end()
@@ -134,59 +138,69 @@ test('\n# parse <li>   <p>hello world</p><span>   </span></li>', function (t) {
     "</ul>" +
     "</html>"
     , expected = [ 
-      { text: 'Asynchronous file open. See open(2). ',
-        parents: [ 'html' ],
-        tag: 'p',
-        open: true },
-      { text: 'flags',
-        parents: [ 'html', 'p' ],
-        tag: 'code',
-        open: true },
-      { text: ' can be:\n\n',
-        parents: [ 'html' ],
-        tag: 'p',
-        open: false },
-      { text: '',
-        parents: [ 'html', 'ul' ],
-        tag: 'li',
-        open: true },
-      { text: '\'r\'',
-        parents: 
-        [ 'html',
-          'ul',
-          'li',
-          'p' ],
-        tag: 'code',
-        open: true },
-      { text: ' - Open file for reading.\nAn exception occurs if the file does not exist.',
-        parents: [ 'html', 'ul', 'li' ],
-        tag: 'p',
-        open: false },
-      { text: '',
-        parents: [ 'html', 'ul' ],
-        tag: 'li',
-        open: false },
-      { text: '',
-        parents: [ 'html', 'ul' ],
-        tag: 'li',
-        open: true },
-      { text: '\'r+\'',
-        parents: 
-        [ 'html',
-          'ul',
-          'li',
-          'p' ],
-        tag: 'code',
-        open: true },
-      { text: ' - Open file for reading and writing.\nAn exception occurs if the file does not exist.',
-        parents: [ 'html', 'ul', 'li' ],
-        tag: 'p',
-        open: false },
-      { text: '',
-        parents: [ 'html', 'ul' ],
-        tag: 'li',
-        open: false } ]
-
+        { text: 'Asynchronous file open. See open(2). ',
+            parents: [ 'html' ],
+            tag: 'p',
+            open: true,
+            close: false },
+          { text: 'flags',
+            parents: [ 'html', 'p' ],
+            tag: 'code',
+            open: true,
+            close: false },
+          { text: ' can be:\n\n',
+            parents: [ 'html' ],
+            tag: 'p',
+            open: false,
+            close: true },
+          { text: '',
+            parents: [ 'html', 'ul' ],
+            tag: 'li',
+            open: true,
+            close: false },
+          { text: '\'r\'',
+            parents: 
+            [ 'html',
+              'ul',
+              'li',
+              'p' ],
+            tag: 'code',
+            open: true,
+            close: false },
+          { text: ' - Open file for reading.\nAn exception occurs if the file does not exist.',
+            parents: [ 'html', 'ul', 'li' ],
+            tag: 'p',
+            open: false,
+            close: true },
+          { text: '',
+            parents: [ 'html', 'ul' ],
+            tag: 'li',
+            open: false,
+            close: true },
+          { text: '',
+            parents: [ 'html', 'ul' ],
+            tag: 'li',
+            open: true,
+            close: false },
+          { text: '\'r+\'',
+            parents: 
+            [ 'html',
+              'ul',
+              'li',
+              'p' ],
+            tag: 'code',
+            open: true,
+            close: false },
+          { text: ' - Open file for reading and writing.\nAn exception occurs if the file does not exist.',
+            parents: [ 'html', 'ul', 'li' ],
+            tag: 'p',
+            open: false,
+            close: true },
+          { text: '',
+            parents: [ 'html', 'ul' ],
+            tag: 'li',
+            open: false,
+            close: true } ]
   test('\n# parse\n' + s + '\nreturns\n' + inspect(expected), function (t) {
     parse(s, function (err, res) {
       t.notok(err, 'returns no errors') 
