@@ -1,7 +1,7 @@
 {
   "name": "hermit",
   "version": "0.1.0",
-  "description": "Prints html in the terminal using colors to reflect the document structure.",
+  "description": "Prints html in the terminal using colors and layout to reflect the document structure.",
   "main": "index.js",
   "scripts": {
     "test": "node test/runner.js"
