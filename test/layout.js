@@ -30,7 +30,10 @@ test('render parsed: \n' + src + '\nwith list indent "12"', function (t) {
         ''
       , 'outside'
       , '12- One Level List'
+      , ''
       , '1212- Two Levels List'
+      , ''
+      , ''
         ].join('\n')
       , layedout = layout(res, { listIndent: '12' })
       , result = render(layedout)
@@ -46,7 +49,10 @@ test('render parsed: \n' + src + '\nwith list indent "1234"', function (t) {
         ''
       , 'outside'
       , '1234- One Level List'
+      , ''
       , '12341234- Two Levels List'
+      , ''
+      , ''
         ].join('\n')
       , layedout = layout(res, { listIndent: '1234' })
       , result = render(layedout)
