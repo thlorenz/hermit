@@ -24,12 +24,12 @@ var src = [
   , '</ul>'
 ].join('\n')
 
-test('render parsed: \n' + src + '\nwith list indent "12"', function (t) {
+test('render parsed: \n' + src + '\nwith list indent "12" and listStyle: "> "', function (t) {
   parse(src, function (err, res) {
     var expected = 
-          '\n\noutside\n12- One Level List\n' 
-        + '\n1212- Two Levels List\n\n'
-      , layedout = layout(res, { listIndent: '12' })
+          '\n\noutside\n12> - One Level List\n' 
+        + '\n1212> - Two Levels List\n\n'
+      , layedout = layout(res, { listIndent: '12', listStyle: '> ' })
       , result = render(layedout)
 
     t.equals(result, expected, 'returns result that renders to ' + expected)
@@ -37,12 +37,12 @@ test('render parsed: \n' + src + '\nwith list indent "12"', function (t) {
   });  
 })
 
-test('render parsed: \n' + src + '\nwith list indent "1234"', function (t) {
+test('render parsed: \n' + src + '\nwith list indent "1234" and listStyle: "> "', function (t) {
   parse(src, function (err, res) {
     var expected = 
-          '\n\noutside\n1234- One Level List\n'
-        + '\n12341234- Two Levels List\n\n'
-      , layedout = layout(res, { listIndent: '1234' })
+          '\n\noutside\n1234> - One Level List\n'
+        + '\n12341234> - Two Levels List\n\n'
+      , layedout = layout(res, { listIndent: '1234', listStyle: '> ' })
       , result = render(layedout)
 
     t.equals(result, expected, 'returns result that renders to ' + expected)
