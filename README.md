@@ -39,7 +39,7 @@ var hermit = require('hermit');
   , html = '<div><h3>Hello from Hermit</h3><p>A little paragraph for you</p></div>';
   , myStylesheet = require('./path/to/my/stylesheet.js');
 
-hermit(html, { listIndent: '    ', stylesheet: myStylesheet }, function (err, res) {
+hermit(html, { listIndent: '    ', listStyle: '* ', stylesheet: myStylesheet }, function (err, res) {
   console.log(res); 
 });
 ```
