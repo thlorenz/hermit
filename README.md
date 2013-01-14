@@ -2,13 +2,35 @@
 
 Prints html in the terminal using colors and simple layout to reflect the document structure.
 
+## Objective
+
+Provide a simple tool to render html in the terminal in a readable format. It is not supposed to replace your browser.
+The main indended use is to render html snippets,  e.g., the ones contained in the descriptions of the [json version of
+the nodejs documentation](http://nodejs.org/api/assert.json).
+
+If you want a terminal browser, try [lynx](http://lynx.browser.org/) instead.
+
 ## Installation
 
     npm install hermit
 
 ## Usage
 
-### As Library
+### From the Command Line
+
+#### Rendering a File
+
+    hermit filename.html
+
+#### Piping an Html String
+
+You can pipe the output of any program that produces an html string into hermit.
+
+**Example:**
+
+    curl http://nodejs.org/api/assert.html | hermit
+
+### From Your Code 
 
 ```js
 var hermit = require('hermit');
