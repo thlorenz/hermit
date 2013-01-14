@@ -6,9 +6,10 @@ var hermit = require('..')
 
 function usage() {
   var msg = [ 
-      'Usage: hermit <filename.html>'
+      ''
+    , 'Usage: hermit <filename.html>'
     , ''
-    , 'Unix Pipe Example: https://github.com/thlorenz/hermit/blob/master/README.md | hermit'
+    , 'Unix Pipe Example: curl http://nodejs.org/api/assert.html | hermit'
     , ''
   ].join('\n');
   console.log(msg);
@@ -22,5 +23,31 @@ function hermitFile() {
 }
 
 // e.g. 'hermit index.html'
-if (args.length === 3) return hermitFile();
+if (args.length === 3) {
+  try {
+    return hermitFile();
+  } catch(e) {
+    console.error(e);
+    return usage();
+  }
+}
 
+if (args.length > 3) return usage();
+
+
+// Unix pipe
+var stdin = process.stdin
+  , stdout = process.stdout
+  , data = '';
+
+stdin.setEncoding('utf-8');
+stdin.resume();
+stdin
+  .on('data', function (chunk) {
+    data += chunk;
+  })
+  .on('end', function () {
+    hermit(data, function (err, res) {
+      console.log(res);  
+    });
+  });
