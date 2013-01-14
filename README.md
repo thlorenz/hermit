@@ -18,6 +18,10 @@ If you want a terminal browser, try [lynx](http://lynx.browser.org/) instead.
 
 ### From the Command Line
 
+To use hermit from the command line, you should install it globally:
+
+    npm -g install hermit
+
 #### Rendering a File
 
     hermit filename.html
