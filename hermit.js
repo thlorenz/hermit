@@ -4,7 +4,6 @@ var parse = require('./lib/parse')
   , render = require('./lib/render');
 
 var hermit = module.exports = function hermit(html, opts, cb) {
-  console.log('running hermit');
   if (!cb) {
     cb = opts;
     opts = {};
