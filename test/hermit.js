@@ -36,14 +36,14 @@ function inspect(obj, depth) {
     }
   , expected = 
         '\u001b[31m\u001b[42m\n\noutside\u001b[49m\u001b[39m\n'
-      + '##\u001b[90m- One Level List\u001b[39m\n\n'
-      + '####\u001b[90m- Two Levels List\u001b[39m\n\n';
+      + '##* \u001b[90m- One Level List\u001b[39m\n\n'
+      + '####* \u001b[90m- Two Levels List\u001b[39m\n\n';
 
   test( 'given stylesheet\n' + inspect(stylesheet) 
       + '\nconverting\n' + html 
       + '\n\nreturns:\n' + expected
     , function (t) {
-        hermit(html, { listIndent: '##', stylesheet: stylesheet }, function (err, res) {
+        hermit(html, { listIndent: '##', listStyle: '* ', stylesheet: stylesheet }, function (err, res) {
           t.equals(res, expected, 'parses, lays out, styles and renders correctly')
           t.end()
         })
