@@ -37,7 +37,7 @@ You can pipe the output of any program that produces an html string into hermit.
 ### From Your Code 
 
 ```js
-var hermit = require('hermit');
+var hermit = require('hermit')
   , html = '<div><h3>Hello from Hermit</h3><p>A little paragraph for you</p></div>';
 
 hermit(html, function (err, res) {
